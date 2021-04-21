@@ -1,15 +1,30 @@
 {
-  "name": "react-use-pwa",
+  "name": "@dotmind/react-use-pwa",
   "version": "1.0.0",
-  "description": "",
+  "description": "Prompt to install Progressive Web App and more with React hooks",
+  "keywords": [
+    "dotmind",
+    "react",
+    "hooks",
+    "pwa",
+    "prompt",
+    "standalone",
+    "typescript"
+  ],
+  "homepage": "https://github.com/dotmind/react-use-pwa",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dotmind/react-use-pwa"
+  },
+  "license": "ISC",
+  "author": "Nicolas Bellot <nicolas@dotmind.io> (https://github.com/bltnico)",
   "main": "./lib/index.js",
+  "types": "./lib/index.d.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "tsc --project ./tsconfig.json",
     "lint": "tslint --fix -p ./tsconfig.json"
   },
-  "author": "",
-  "license": "ISC",
   "devDependencies": {
     "@types/react": "17.0.3",
     "react": "17.0.2",
