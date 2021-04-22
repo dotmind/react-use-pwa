@@ -42,6 +42,8 @@ Please check if your app have the required criteria before use : [web.dev/instal
 
 Want to make a good PWA ? [Read this](https://web.dev/pwa-checklist/)
 
+SSR support ✅
+
 ## 💻 Installation
 
 ```bash
