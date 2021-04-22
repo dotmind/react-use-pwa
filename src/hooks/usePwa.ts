@@ -1,17 +1,19 @@
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
+import { isServer } from './../utils';
+
 enum UserChoice {
   ACCEPTED = 'accepted',
   DISMISSED = 'dismissed',
 };
 
 interface BeforeInstallPromptEvent extends Event {
-	readonly userChoice: Promise<{
-		outcome: UserChoice,
-		platform: string,
-	}>
+  readonly userChoice: Promise<{
+    outcome: UserChoice,
+    platform: string,
+  }>
 
-	prompt(): Promise<void>;
+  prompt(): Promise<void>;
 };
 
 interface IusePwa {
@@ -43,16 +45,28 @@ const usePwa = (): IusePwa => {
   }, []);
 
   useEffect(() => {
+    if (isServer()) {
+      return;
+    }
+
     window.addEventListener('beforeinstallprompt', handleBeforePromptEvent);
     return () => window.removeEventListener('beforeinstallprompt', handleBeforePromptEvent)
   }, [handleBeforePromptEvent]);
 
   useEffect(() => {
+    if (isServer()) {
+      return;
+    }
+
     window.addEventListener('appinstalled', handleInstallEvent);
     return () => window.removeEventListener('appinstalled', handleInstallEvent);
   }, [handleInstallEvent]);
 
   useEffect(() => {
+    if (isServer()) {
+      return;
+    }
+
     if (navigator) {
       setOffline(!navigator.onLine);
     }
@@ -66,7 +80,7 @@ const usePwa = (): IusePwa => {
   }, [handleOfflineEvent]);
 
   const installPrompt = useCallback(async () => {
-    if (!deferredPrompt.current) {
+    if (!deferredPrompt.current || isServer()) {
       return;
     }
 
@@ -77,7 +91,7 @@ const usePwa = (): IusePwa => {
   }, []);
 
   const isStandalone = useMemo(() => (
-    navigator.standalone || window.matchMedia('(display-mode: standalone)').matches
+    !isServer() && (navigator.standalone || window.matchMedia('(display-mode: standalone)').matches)
   ), []);
 
   return {
