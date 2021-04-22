@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 
 import usePwa from './usePwa';
+import { isServer } from './../utils';
 
 interface Options {
   fixed: boolean;
@@ -16,6 +17,10 @@ const usePwaAppSize = (
   const { isStandalone } = usePwa();
 
   useEffect(() => {
+    if (isServer()) {
+      return;
+    }
+
     const resizeWindow = (): void => window.resizeTo(width, height);
 
     if (isStandalone) {
