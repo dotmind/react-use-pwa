@@ -1,6 +1,6 @@
 {
   "name": "@dotmind/react-use-pwa",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Prompt to install Progressive Web App and more with React hooks",
   "keywords": [
     "dotmind",
